@@ -59,3 +59,4 @@ typings/
 
 .idyll
 build
+.DS_Store
