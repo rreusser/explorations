@@ -1,0 +1,16 @@
+module.exports = {
+  create: require('./create'),
+  fromValues: require('./fromValues'),
+  set: require('./set'),
+  copy: require('./copy'),
+  scale: require('./scale'),
+  add: require('./add'),
+  sub: require('./sub'),
+  mul: require('./mul'),
+  inv: require('./inv'),
+  div: require('./div'),
+  sqr: require('./sqr'),
+  sqrt: require('./sqrt'),
+  exp: require('./exp'),
+  sinhcosh: require('./sinhcosh'),
+};

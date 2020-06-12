@@ -1,0 +1,210 @@
+[meta
+  fullWidth:true
+  title:"Sphere Eversion"
+  twitterHandle:"rickyreusser"
+/]
+
+[Header
+  title: "Sphere Eversion"
+  author: "Ricky Reusser"
+  authorLink: "https://github.com/rreusser" date: "May 25, 2020"
+  fullWidth:true
+/]
+
+Topology is the study of the properties of geometric objects which aren't changed by continuous deformation. A standard low-grade math joke is that toplogists consider a coffee mug and a doughnut equivalent because they're both torii; one can be continuously deformed into the other—called a *homotopy*—without cutting the surface. (Pauses for laughter.)
+
+[figure]
+  [img src:"static/images/Mug_and_Torus_morph.gif"/]
+  [figcaption]
+    Homotopy between two different embeddings of the torus in [Equation latex:"\mathbb{R}^3"/]. Source: [Wikipedia](https://commons.wikimedia.org/wiki/File:Mug_and_Torus_morph.gif)
+  [/figcaption]
+[/figure]
+
+In this post, we play a topological game called *eversion*. Our objective is simple: turn a sphere inside out without cutting or creasing it. We consider a sphere, though a torus is also an [interesting challenge](https://www.youtube.com/watch?v=kQcy5DvpvlM).
+
+That a sphere (specifically the two-sphere [Equation latex:"S^2"/] embedded in three dimensional space [Equation latex:"\mathbb{R}^3"/]) can be turned inside out was proved by Stephen Smale in 1957. However the proof is strictly a proof of existence, offering no specific guidance for those hoping to perform the feat.
+
+TODO: Step through or at least reference why this is impossible for [Equation latex:"S^1"/] in [Equation latex:"\mathbb{R}^2"/] (i.e. a circle). In short, every attempt to modify the turning number introduces oppositely oriented turns which prevent you from changing it at all! See for example: [Outside In](https://www.youtube.com/watch?v=wO61D9x6lNY).
+
+Since the original proof, a number of realizations of sphere eversion have been discovered, ranging in generality and complexity. This post follows the method of Bednorz and Bednorz from [Analytic sphere eversion using ruled surfaces](https://arxiv.org/abs/1711.10466).
+
+Before stepping through the eversion, we lay out our ground rules, of which there are just two. We may not cut the surface, and the surface must always remain smooth.  Note that unlike actual physical objects, self-intersection of the surface *is* permitted.
+
+These two rules thwart trivial solutions. The first rule prevents us from simply cutting the sphere at the equator and gluing it together backwards. The second rule, smoothness, is trickier to visualize. We'll see below that it prevents us from pushing one end of the sphere straight through the other.
+
+## Bednorz' Sphere Eversion
+
+We start with a full presentation of the eversion of Bednorz and Bednorz in [Analytic sphere eversion using ruled surfaces](https://arxiv.org/abs/1711.10466). It goes by quickly, so we'll then break it down and try to understand it a bit better.
+
+[var name:"quality" value:"high"/]
+Quality: [Select value:quality options:`["low", "medium", "high"]`/]
+
+[Scrollyteller
+  fullWidth:true
+]
+  [Scrollyteller.FixedContent]
+    [SphereEversion quality:quality/]
+  [/Scrollyteller.FixedContent]
+
+  [Scrollyteller.Frame]
+    [Caption left:'10%' top:'90%']
+      We start with a sphere.
+    [/Caption]
+  [/Scrollyteller.Frame]
+
+  [Scrollyteller.Frame]
+    [Caption right:'10%' top:'90%']
+      We push on one pole to form an indentation.
+    [/Caption]
+  [/Scrollyteller.Frame]
+
+  [Scrollyteller.Frame]
+    [Caption left:'10%' top:'70%']
+      And add a bit of twist.
+    [/Caption]
+  [/Scrollyteller.Frame]
+
+  [Scrollyteller.Frame]
+    [Caption right:'5%' top:'90%']
+      Here's where the magic happens. We swap the inner and outer shells, being very careful not to introduce any creases.
+    [/Caption]
+  [/Scrollyteller.Frame]
+
+  [Scrollyteller.Frame]
+    [Caption right:'5%' top:'90%']
+      Don't worry! We'll look at this step more carefully below.
+    [/Caption]
+  [/Scrollyteller.Frame]
+
+  [Scrollyteller.Frame]
+    [Caption left:'10%' top:'90%']
+      Upon removing the indentation, we find the inside of the sphere has become the outside!
+    [/Caption]
+  [/Scrollyteller.Frame]
+
+  [Scrollyteller.Frame/]
+  [Scrollyteller.Frame/]
+[/Scrollyteller]
+
+Success! But that all happened very quickly. What is clear is that it's of critical importance how we manage the opening at the top. In some sense, we do simply push one end of the sphere right through the other, but we need some clever tricks to keep the hole at the top smooth.
+
+Bednorz et al. (or, well, Bednorz et Bednorz) break the method down as follows. As long as nothing topologically interesting happens at the poles of the sphere, we can simply remove them from the equation and focus on a cylindrical band around the equator. All that's left then is to manipulate the cylindrical band carefully and replace the poles at the end of the process.
+
+The key element of their method is a family of *[ruled surfaces](https://mathworld.wolfram.com/RuledSurface.html)*, or surfaces swept out by a straight line moving through space, which accomplish this task. They propose a family parameterized by time [Equation latex:"t"/]. They're careful to prove the surface remains smooth during the process, but we'll remain content to vary [Equation latex:"t"/] from one value to another, get the result we want, and visually confirm smoothness.
+
+Recall that this is topology so that we've been calling this surface a cylinder not because it looks like the ordinary right circular cylinder we're familiar with, but because it can smoothly be turned into a right circular cylinder.
+
+They propose the family of ruled surfaces given by the equations
+
+[Equation display:true latex:"
+\begin{aligned}
+x &= t \cos \phi + p \sin (n - 1) \phi - h \sin \phi \\
+y &= t \sin \phi + p \cos (n - 1) \phi + h \cos \phi \\
+z &= h \sin n \phi - (t / n) \cos n \phi - qth.
+\end{aligned}
+"/]
+
+The variable [Equation latex:"\phi"/] parameterizes the polar angle of the cylinder from [Equation latex:"-\pi"/] to [Equation latex:"\pi"/] while [Equation latex:"h"/] parameterizes the vertical dimension of the cylinder. They suggest [Equation latex:"q = 2/3"/] and [Equation latex:"p = 1 - |qt|"/].
+
+[var name:"n" value:2/]
+[var name:"t" value:1.5/]
+[var name:"q" value:0.66667/]
+
+Adjust the time parameter [Equation latex:"t"/] and observe the shape of the surface. There are two particular things to note. First, the surface always remains smooth, despite self-intersections, and second, the top and bottom of the edges of the cylinder swap places (with a bit of rotation which doesn't trouble us) as we move from [Equation latex:"t = -1.5"/] to [Equation latex:"t = 1.5"/].
+
+Note also that although we'll visualize eversion with [Equation latex:"n = 2"/], the eversion also works for values greater than two.
+
+[Range value:t min:-1.5 max:1.5 step:0.01/] t = [Display value:t format:"f"/][br/]
+[Range value:n min:2 max:4 step:1/] n = [Display value:n format:"d"/]
+[figure style:`{height:Math.min(typeof window === "undefined" ? 10000 : window.innerWidth, 700) + 'px', position:'relative'}`]
+  [Surface n:n t:t q:q quality:quality/]
+  [figcaption style:`{textAlign:'left'}`]
+    The proposed cylindrical ruled surface.
+  [/figcaption]
+[/figure]
+
+[br/]
+
+Of course we want to evert a full sphere and not just a cylindrical band, so the remainder of their paper focuses on using stereographic projections to smoothly close the caps of the cylindrical band and maintain the topology of the sphere during the entire process. The full eversion is illustrated above, but let's now step back through it, taking a bit more care to focus on the regions of interest.
+
+[Scrollyteller
+  fullWidth:true
+]
+  [Scrollyteller.FixedContent]
+    [SphereEversionTwo n:n quality:quality/]
+  [/Scrollyteller.FixedContent]
+
+  [Scrollyteller.Frame]
+    [Caption left:'10%' top:'90%']
+      We start again, this time with our perturbed sphere.
+    [/Caption]
+  [/Scrollyteller.Frame]
+
+  [Scrollyteller.Frame]
+    [Caption right:'10%' top:'60%']
+      We restrict our attention to the cylindrical band separating the inner and outer shells.
+    [/Caption]
+  [/Scrollyteller.Frame]
+
+  [Scrollyteller.Frame]
+    [Caption left:'10%' top:'70%']
+      As long as we keep the surface smooth and don't introduce extra twisting at the edges, we can distort the surface however we'd like.
+    [/Caption]
+  [/Scrollyteller.Frame]
+
+  [Scrollyteller.Frame]
+    [Caption right:'5%' top:'90%']
+      To perform the eversion, we must swap the [span style:`{color:'blue'}`]upper[/span] and [span style:`{color:'red'}`]lower[/span] edges of this cylinder.
+    [/Caption]
+  [/Scrollyteller.Frame]
+
+  [Scrollyteller.Frame/]
+
+  [Scrollyteller.Frame]
+    [Caption left:'5%' top:'10%']
+      Recall that we can't just translate one end past the other without getting stuck with a [span style:`{color:'red'}`]cusp[/span] which violates our smoothness rule.
+    [/Caption]
+  [/Scrollyteller.Frame]
+
+  [Scrollyteller.Frame/]
+  [Scrollyteller.Frame]
+    [Caption left:'5%' top:'90%']
+      Let's try again.
+    [/Caption]
+  [/Scrollyteller.Frame]
+  [Scrollyteller.Frame/]
+
+  [Scrollyteller.Frame]
+    [Caption left:'10%' top:'50%']
+      To avoid the cusp, we distort the cylinder into the above ruled surface with which we *can* smoothly swap the upper and lower edges.
+    [/Caption]
+  [/Scrollyteller.Frame]
+
+  [Scrollyteller.Frame]
+    [Caption left:'10%' top:'90%']
+      We carefully slide one end past the other.
+    [/Caption]
+  [/Scrollyteller.Frame]
+
+  [Scrollyteller.Frame/]
+
+  [Scrollyteller.Frame]
+    [Caption left:'10%' top:'90%']
+      And remove the twist.
+    [/Caption]
+  [/Scrollyteller.Frame]
+
+  [Scrollyteller.Frame/]
+
+  [Scrollyteller.Frame]
+    [Caption left:'10%' top:'90%']
+      Restoring the poles which have been unaffected by the process, we confirm we've successfully turned our sphere inside out!
+    [/Caption]
+  [/Scrollyteller.Frame]
+
+  [Scrollyteller.Frame/]
+  [Scrollyteller.Frame/]
+  [Scrollyteller.Frame/]
+[/Scrollyteller]
+
+Conclusion TBD.
