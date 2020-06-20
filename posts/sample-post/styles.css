@@ -1198,17 +1198,6 @@ figcaption {
   bottom: 0;
 }
 
-.eversion__section {
-  position: absolute;
-  top: 5px;
-  left: 18px;
-  right: 18px;
-}
-
-.eversion__section input {
-  width:100%;
-}
-
 @media all and (max-width: 640px) {
   .desktop {
     display: none;

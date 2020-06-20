@@ -1,0 +1,37 @@
+[meta
+  fullWidth:true
+  title:"Sample Post"
+  twitterHandle:"rickyreusser"
+/]
+
+[Header
+  title: "Sample Post"
+  author: "Ricky Reusser"
+  authorLink: "https://github.com/rreusser" date: "May 25, 2020"
+  fullWidth:true
+/]
+
+
+[Scrollyteller fullWidth:true]
+  [Scrollyteller.FixedContent]
+    [SphereEversion/]
+  [/Scrollyteller.FixedContent]
+
+  [Scrollyteller.Frame id:"frame1"]
+    [Caption left:'10%' top:'90%']
+      Here's a hyperbola.
+    [/Caption]
+  [/Scrollyteller.Frame]
+
+  [Scrollyteller.Frame id:"frame2"]
+    [Caption right:'10%' top:'90%']
+      We can vary a parameter
+    [/Caption]
+  [/Scrollyteller.Frame]
+
+  [Scrollyteller.Frame id:"frame3"]
+    [Caption right:'10%' top:'90%']
+      We can vary a parameter
+    [/Caption]
+  [/Scrollyteller.Frame]
+[/Scrollyteller]

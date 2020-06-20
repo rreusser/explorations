@@ -41,74 +41,79 @@ class SphereEversion extends React.Component {
 
     const Q = 2 / 3;
     const t0 = 1.0;
-    this._section = {t: 0, value: 10};
+    const t1 = t0 + 2.0;
+    const t1p = t1 + 1.0;
+    const t2 = t1 + 7.0;
+    const t3 = t2 + 2.0;
+    const t4 = t3 + 2.0;
+    const t5 = t4 + 2.0;
+
+    this.nn = {t: t0 + 0, value: 2};
 
     const story = sequencer({
-      section: [this._section],
-      shittyEversion: [
-        {t: 0, value: 0},
-      ],
       color: [
         {t: t0 + 0, value: 0.0},
         {t: t0 + 6, value: 1.0, ease: eases.linear },
       ],
-      n: [
-        {t: t0 + 0, value: 2},
-      ],
-      posClip: [
-        {t: t0 + 0, value: 1},
-      ],
-      negClip: [
-        {t: t0 + 0, value: 1},
-      ],
-      stereo: [
-        {t: t0 + 0.5, value: 1},
-      ],
-      fatEdge: [
-        {t: t0, value: 0},
-      ],
+      n: [this.nn],
       rotation: [
-        {t: t0 - 3, value: 1},
+        {t: t0 - 3, value: 2},
         {t: t0 + 0, value: 0},
-        {t: t0 + 5.5, value: 0},
-        {t: t0 + 9, value: 1},
+        {t: t1 + 6, value: 0},
+        {t: t1 + 9, value: 0},
       ],
       translation: [
-        {t: t0 + 0, value: 0},
-        {t: t0 + 0.7, value: 1.4},
-        {t: t0 + 2, value: 1},
-        {t: t0 + 4, value: 1},
-        {t: t0 + 5.3, value: 1.4},
-        {t: t0 + 6, value: 0},
+        {t: t0 + 0.5, value: 1},
+        {t: t1, value: 0},
+        {t: t4, value: 0},
+        {t: t5 - 0.5, value: 1},
       ],
       scale: [
-        {t: t0 + 0, value: 1.5 / Math.pow(Q, 0.5)},
-        {t: t0 + 1, value: 0.6},
-        {t: t0 + 1.5, value: 0.7},
-        {t: t0 + 4.5, value: 0.7},
-        {t: t0 + 5, value: 0.6},
-        {t: t0 + 6, value: 1.5 / Math.pow(Q, 0.5)},
+        {t: t0 + 1, value: 0.5},
+        {t: t1, value: 0.4},
+        {t: t4, value: 0.4},
+        {t: t5 - 1, value: 0.5},
       ],
-      limit: [
-        {t: 0, value: 0},
+      stereo: [
+        {t: t0 + 0.75, value: 1},
+        {t: t1, value: 0},
+        {t: t4, value: 0},
+        {t: t5 - 0.75, value: 1},
+      ],
+      posClip: [
+        {t: t0 + 0.25, value: 1},
+        {t: t0 + 1.25, value: 0.5},
+        {t: t5 - 1.0, value: 0.5},
+        {t: t5 + 0.5, value: 1},
+      ],
+      negClip: [
+        {t: t0 + 0.0, value: 1},
+        {t: t0 + 1.0, value: 0.5},
+        {t: t5 - 1.5, value: 0.5},
+        {t: t5 + 0.0, value: 1},
+      ],
+      fatEdge: [
+        {t: t1 + 0.25, value: 0},
+        {t: t1 + 0.5, value: 1},
+        {t: t4 - 0.5, value: 1},
+        {t: t4 + 0.25, value: 0},
+      ],
+      shittyEversion: [
+        {t: t1p, value: 0},
+        {t: t1p + 1.0, value: 1},
+        {t: t1p + 2.0, value: 1},
+        {t: t1p + 3.0, value: 0},
       ],
       t: [
-        {t: t0 + 0, value: 1 / Q},
-        {t: t0 + 2, value: 1 / Q},
-        {t: t0 + 4, value: -1 / Q},
-        {t: t0 + 6, value: -1 / Q},
+        {t: t2, value: 1 / Q},
+        {t: t3, value: -1 / Q},
+        {t: t4, value: -1 / Q},
       ],
       alpha: [
-        {t: t0 + 0, value: 1e-5},
-        {t: t0 + 1, value: 1},
-        {t: t0 + 5, value: 1},
-        {t: t0 + 6, value: 1e-5},
+        {t: t0, value: 1},
       ],
       beta: [
-        {t: t0 + 0, value: 1},
-        {t: t0 + 1, value: 1 / 20},
-        {t: t0 + 5, value: 1 / 20},
-        {t: t0 + 6, value: 1},
+        {t: t0, value: 1 / 20},
       ],
       q: [
         {t: t0 + 0, value: Q},
@@ -117,17 +122,16 @@ class SphereEversion extends React.Component {
         {t: t0 + 0, value: 1},
       ],
       xi: [
-        {t: t0 + 0, value: 0},
-        {t: t0 + 2, value: 1},
-        {t: t0 + 4, value: 1},
-        {t: t0 + 5, value: 0},
-        {t: t0 + 6, value: 0},
+        {t: t2 + 0, value: 1},
+        {t: t2 + 1, value: 0},
+        {t: t3 + 1, value: 0},
+        {t: t4 + 0, value: 0},
       ],
       lambda: [
-        {t: t0 + 0, value: 0},
-        {t: t0 + 2, value: 1},
-        {t: t0 + 4, value: 1},
-        {t: t0 + 6, value: 0},
+        {t: t1p + 4, value: 0},
+        {t: t2 - 1, value: 1},
+        {t: t3, value: 1},
+        {t: t4, value: 0},
       ],
       omega: [
         {t: t0 + 0, value: 2},
@@ -136,7 +140,6 @@ class SphereEversion extends React.Component {
         {t: t0 + 0, value: 1 / Q},
       ]
     });
-
 
     this.regl = createREGL({
       canvas: canvas,
@@ -149,13 +152,14 @@ class SphereEversion extends React.Component {
     window.addEventListener('resize', this.resize);
     this.resize();
 
-    const passiveScrollChannel = props.passiveScrollChannel;
+    const passiveScrollChannel = this.props.passiveScrollChannel;
 
     this.eversion = createEversion(this.regl, {
       scroll: passiveScrollChannel,
       state: story,
+      res: preferredRes,
       dpi,
-      res: preferredRes
+      phi: 0.4
     });
   }
 
@@ -170,9 +174,6 @@ class SphereEversion extends React.Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    if (this._section !== undefined && nextProps.section !== undefined) { this._section.value = nextProps.section;
-      this.eversion.redraw();
-    }
     if (nextProps.quality !== this.props.quality) {
       this.destroy()
       this.initializeREGL(this.ref, nextProps);

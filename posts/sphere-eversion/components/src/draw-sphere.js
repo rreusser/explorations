@@ -15,7 +15,7 @@ module.exports = function (regl, res) {
     vDomain: [
       -Math.PI * fudge,
       Math.PI * fudge
-    ]
+    ],
   });
 
   const positionsBuffer = regl.buffer(mesh.positions);
@@ -117,7 +117,7 @@ module.exports = function (regl, res) {
       uniform mat4 view;
       uniform bool wire;
       varying vec2 vUV;
-      uniform float fatEdge, posClip, negClip, shittyEversion, pixelRatio;
+      uniform float fatEdge, posClip, negClip, shittyEversion, pixelRatio, section;
 
       #define PI 3.141592653589
 
@@ -136,7 +136,21 @@ module.exports = function (regl, res) {
         return smoothstep(d * w1, d * (w1 + feather), looped);
       }
 
+      float stripeFactor (float parameter, float width, float feather) {
+        float w1 = width - feather * 0.5;
+        float d = fwidth(parameter);
+        return smoothstep(d * w1, d * (w1 + feather), abs(parameter));
+      }
+
+
       void main () {
+        float divFunc = section - vPosition.y;
+        if (divFunc < 0.0) {
+          discard;
+          return;
+        }
+        float divider = abs(divFunc) > 0.04 ? 1.0 : stripeFactor(divFunc, 3.0 * pixelRatio, 1.0);
+
         vec3 dPdx = dFdx(vPosition);
         vec3 dPdy = dFdy(vPosition);
         vec3 normal = normalize(cross(dPdx, dPdy));
@@ -148,7 +162,7 @@ module.exports = function (regl, res) {
 
         float sgn = gl_FrontFacing ? 1.0 : -1.0;
 
-        float grid = gridFactor(vUV * vec2(2.0, 1.0) * 8.0 / PI, 0.45 * pixelRatio, 1.0);
+        float grid = gridFactor(vUV * vec2(2.0, 1.0) * 6.0 / PI, 0.45 * pixelRatio, 1.0);
 
         float fatGrid = gridFactor((vUV.x * 0.638 + negClip) / (posClip + negClip), 7.0 * pixelRatio, 1.0);
         if (abs(vUV.x) < 0.7) fatGrid = 1.0;
@@ -173,6 +187,8 @@ module.exports = function (regl, res) {
           );
           gl_FragColor.a += 0.12 * bad * (abs(vPosition).y < 0.1 ? 1.0 : 0.0);
 
+          //gl_FragColor = mix(vec4(0.0, 1.0, 1.0, 1.0), gl_FragColor, divider);
+
           if (gl_FragColor.a < 1e-3) discard;
         } else {
           baseColor = mix(
@@ -189,6 +205,7 @@ module.exports = function (regl, res) {
           gl_FragColor = mix(vUV.x > 0.0 ? vec4(1, 0.1, 0.2, 1) : vec4(0.4, 0.2, 1, 1), gl_FragColor, fatGrid);
 
         }
+        gl_FragColor.rgb = mix(vec3(0.0, 1.0, 0.2), gl_FragColor.rgb, divider);
       }
     `,
     uniforms: {
@@ -212,6 +229,7 @@ module.exports = function (regl, res) {
       fatEdge: regl.prop('fatEdge'),
       shittyEversion: regl.prop('shittyEversion'),
       pixelRatio: regl.context('pixelRatio'),
+      section: (ctx, props) => Math.sinh(props.section * 1.2),
     },
     attributes: {
       uv: positionsBuffer,

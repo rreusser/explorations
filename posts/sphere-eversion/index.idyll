@@ -43,7 +43,10 @@ Quality: [Select value:quality options:`["low", "medium", "high"]`/]
   fullWidth:true
 ]
   [Scrollyteller.FixedContent]
-    [SphereEversion quality:quality/]
+    [SphereEversion quality:quality section:section1/]
+    [div className:"eversion__section"]
+      [Range value:section1 min:-1.5 max:1.5 step:0.001/]
+    [/div]
   [/Scrollyteller.FixedContent]
 
   [Scrollyteller.Frame]
@@ -109,15 +112,18 @@ The variable [Equation latex:"\phi"/] parameterizes the polar angle of the cylin
 [var name:"n" value:2/]
 [var name:"t" value:1.5/]
 [var name:"q" value:0.66667/]
+[var name:"section1" value:10/]
+[var name:"section2" value:10/]
+[var name:"surfaceSection" value:10/]
 
 Adjust the time parameter [Equation latex:"t"/] and observe the shape of the surface. There are two particular things to note. First, the surface always remains smooth, despite self-intersections, and second, the top and bottom of the edges of the cylinder swap places (with a bit of rotation which doesn't trouble us) as we move from [Equation latex:"t = -1.5"/] to [Equation latex:"t = 1.5"/].
 
 Note also that although we'll visualize eversion with [Equation latex:"n = 2"/], the eversion also works for values greater than two.
 
 [Range value:t min:-1.5 max:1.5 step:0.01/] t = [Display value:t format:"f"/][br/]
-[Range value:n min:2 max:4 step:1/] n = [Display value:n format:"d"/]
+[Range value:n min:2 max:4 step:1/] n = [Display value:n format:"d"/][br/]
 [figure style:`{height:Math.min(typeof window === "undefined" ? 10000 : window.innerWidth, 700) + 'px', position:'relative'}`]
-  [Surface n:n t:t q:q quality:quality/]
+  [Surface n:n t:t q:q quality:quality section:surfaceSection/]
   [figcaption style:`{textAlign:'left'}`]
     The proposed cylindrical ruled surface.
   [/figcaption]
@@ -131,7 +137,10 @@ Of course we want to evert a full sphere and not just a cylindrical band, so the
   fullWidth:true
 ]
   [Scrollyteller.FixedContent]
-    [SphereEversionTwo n:n quality:quality/]
+    [SphereEversionTwo n:n quality:quality section:section2/]
+    [div className:"eversion__section"]
+      [Range value:section2 min:-1.5 max:1.5 step:0.001/]
+    [/div]
   [/Scrollyteller.FixedContent]
 
   [Scrollyteller.Frame]

@@ -49,6 +49,7 @@ class SphereEversion extends React.Component {
     const t5 = t4 + 2.0;
 
     this.nn = {t: t0 + 0, value: 2};
+    this._section = {t: 0, value: 10};
 
     const story = sequencer({
       color: [
@@ -62,6 +63,7 @@ class SphereEversion extends React.Component {
         {t: t1 + 6, value: 0},
         {t: t1 + 9, value: 0},
       ],
+      section: [this._section],
       translation: [
         {t: t0 + 0.5, value: 1},
         {t: t1, value: 0},
@@ -174,6 +176,10 @@ class SphereEversion extends React.Component {
   }
 
   componentWillReceiveProps (nextProps) {
+    if (this._section !== undefined && nextProps.section !== undefined) {
+      this._section.value = nextProps.section;
+      this.eversion.redraw();
+    }
     if (nextProps.quality !== this.props.quality) {
       this.destroy()
       this.initializeREGL(this.ref, nextProps);

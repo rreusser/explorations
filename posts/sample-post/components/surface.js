@@ -55,7 +55,6 @@ class SphereEversion extends React.Component {
     const Q = 2 / 3;
 
     this.eversionState = {
-      section: 10,
       color: 0.0,
       n: 2,
       rotation: 0,
