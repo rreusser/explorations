@@ -115,7 +115,6 @@ class Scrollyteller extends React.Component {
         progress = (y - rect.top) / rect.height;
       }
     }
-    console.log(activeFrame, progress);
 
     if (rect.top > 0) {
       if (this.state.contentState !== 'static-top') {
