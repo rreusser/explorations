@@ -13,6 +13,10 @@
       "components"
     ]
   },
+  "scripts": {
+    "start": "budo components/src/driver.js --open --live",
+    "build": "mkdir -p ../../docs/sphere-eversion/demo && browserify components/src/driver.js | indexhtmlify | html-inject-meta > ../../docs/sphere-eversion/demo/index.html"
+  },
   "dependencies": {
     "d3": "^4.0.0",
     "h": "^1.0.0",
@@ -20,6 +24,9 @@
     "idyll-d3-component": "^2.0.0"
   },
   "devDependencies": {
-    "gh-pages": "^0.12.0"
+    "budo": "^11.6.4",
+    "gh-pages": "^0.12.0",
+    "html-inject-meta": "^3.0.0",
+    "indexhtmlify": "^2.0.0"
   }
 }

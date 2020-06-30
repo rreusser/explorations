@@ -229,4 +229,6 @@ There's no shortage of really great visualizations and resources regarding spher
 - [Everting a Sphere by Chris Hills](https://chrishills.org.uk/ChrisHills/sphereeversion/): an excellent collection of links and resources
 - [Sphere Eversion on Wikipedia](https://en.wikipedia.org/wiki/Sphere_eversion)
 
+This post is created using [idyll](https://idyll-lang.org/) and [regl](https://github.com/regl-project/regl). You can find the full article [source here](https://github.com/rreusser/explorations/tree/master/posts/sphere-eversion).
+
 Comments? Questions? Corrections? [Let me know!](https://twitter.com/rickyreusser)

@@ -25,10 +25,17 @@ const state = GUI(State({
   translation: State.Slider(0.5, {min: 0, max: 3, step: 0.1, label: 'translation'}),
   limit: State.Slider(0, {min: 0, max: 1, step: 0.01, label: 'limit'}),
   rotation: State.Slider(0, {min: 0, max: 1, step: 0.01, label: 'rotation'}),
+  section: State.Slider(2, {min: -2, max: 2, step: 0.01, label: 'rotation'}),
+  negClip: 1,
+  posClip: 1,
+  shittyEversion: 0,
+  stereo: 1,
+  Qinv: 0,
+  fatEdge: 100,
 }));
 
 state.getState = function () { return this; }
 
-const eversion = new Eversion(regl, {state, wheel: true});
+const eversion = new Eversion(regl, {state, wheel: true, res: 150});
 state.$onChange(eversion.redraw);
 
