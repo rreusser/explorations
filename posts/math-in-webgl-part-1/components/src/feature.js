@@ -11,10 +11,11 @@ module.exports = function Eversion (regl, props) {
   let scale = ar > 1.0 ? 1.0 : ar;
 
   const camera = createCamera(regl, {
-    distance: 6,
+    center: [0, 0, 0],
+    distance: 3,
     damping: 0,
     near: 0.1,
-    far: props.far === undefined ? 10.0 : props.far,
+    far: 20.0,
     theta: 0.1,
     phi: props.phi === undefined ? 0.7 : props.phi,
     renderOnDirty: false,
@@ -22,9 +23,9 @@ module.exports = function Eversion (regl, props) {
     wheel: props.wheel
   });
 
-  const smoothedScroll = new Smoother(0.0, 0.05);
+  const smoothedScroll = new Smoother(0.0, 0.1);
 
-  const drawSphere = createDrawSphere(regl, props.res);
+  const drawSurface = createDrawSphere(regl, props.res);
 
   let dirty = true;
 
@@ -36,22 +37,18 @@ module.exports = function Eversion (regl, props) {
     scale = ar > 1.0 ? 1.0 : ar;
   });
 
-  let frame = regl.frame(({tick, time}) => {
+  let frame = regl.frame(({tick}) => {
     try {
       let drawn = false;
 
       if (props.scroll) {
         smoothedScroll.setTarget(props.scroll.position * (props.scroll.frameCount - 1));
         smoothedScroll.tick();
+      } else {
+        smoothedScroll.setTarget(props.state.t);
+        smoothedScroll.tick();
       }
-      /*else {
-        const duration = 8.0;
-        const speed = 0.5;
-        //smoothedScroll.setTarget((1.0 - Math.abs(((time * 0.05) % 2) - 1)) * 8.0);
-        smoothedScroll.setTarget((1.0 - Math.abs(((time * 0.05 * speed / duration) % 2) - 1)) * 16.0 * duration);
-        smoothedScroll.tick()
-      }*/
-        
+      
       if (props.state.setPosition) {
         props.state.setPosition(smoothedScroll.getValue());
       }
@@ -59,15 +56,19 @@ module.exports = function Eversion (regl, props) {
       if (Math.abs(smoothedScroll.getSlope()) > 1e-4) dirty = true;
 
       camera(cameraState => {
-        if (!dirty && !cameraState.dirty) return;
+        //if (!dirty && !cameraState.dirty) return;
         drawn = true;
 
         const state = props.state.getState()
 
         regl.clear({color: [1, 1, 1, 1]});
 
-        drawSphere({wire: false, ...state, scale: state.scale * scale});
-        drawSphere({wire: true, ...state, scale: state.scale * scale});
+        if (state.baseRendering) {
+          drawSurface({wire: false, ...state, t: smoothedScroll.getValue()});
+        }
+        if (state.fakeTransparency) {
+          drawSurface({wire: true, ...state, t: smoothedScroll.getValue()});
+        }
       });
 
       if (drawn) dirty = false;
