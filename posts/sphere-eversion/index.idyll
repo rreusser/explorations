@@ -42,7 +42,7 @@ Before stepping through the eversion, we lay out our ground rules, of which ther
 
 We start with a full presentation of the sphere eversion of Bednorz and Bednorz in [Analytic sphere eversion using ruled surfaces](https://arxiv.org/abs/1711.10466). It goes by quickly, so we'll then break it down and try to understand it a bit better. Along the way, you can drag the slider at the top to examine cross-sections.
 
-[var name:"quality" value:"high"/]
+[var name:"quality" value:"medium"/]
 Quality: [Select value:quality options:`["low", "medium", "high"]`/]
 
 [Scrollyteller
