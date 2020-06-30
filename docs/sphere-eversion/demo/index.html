@@ -1302,7 +1302,7 @@ module.exports = function (regl, res) {
 
         float bad = smoothstep(0.8, 1.0, shittyEversion);
 
-        if (fract(vUV.y * (0.5 / PI) * strips) > 0.5) discard; 
+        if (fract(vUV.y * (0.5 / PI) * strips) > 0.25) discard; 
 
         if (wire) {
           vec3 gridColor = mix(

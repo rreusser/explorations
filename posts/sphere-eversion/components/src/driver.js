@@ -10,9 +10,27 @@ const regl = createREGL({
   ]
 });
 
+const sequencer = require('./sequencer');
+
+const story = sequencer({
+  lambda: [
+    { t: 0, value: 0},
+    { t: 1, value: 1},
+    { t: 3, value: 1},
+    { t: 4, value: 0},
+  ],
+  t: [
+    { t: 1, value: 1.5},
+    { t: 3, value: -1.5},
+  ]
+});
+
+
 const state = GUI(State({
+  animate: true,
+  animationSpeed: State.Slider(0.5, {min: 0.01, max: 1, step: 0.01}),
   n: State.Slider(2, {min: 2, max: 6, step: 1}),
-  t: State.Slider(1.5, {min: -1.5, max: 1.5, step: 0.01}),
+  t: State.Slider(1.5, {min: -1.5, max: 1.5, step: 0.01, label: 't'}),
   alpha: State.Slider(1, {min: 0, max: 1.5, step: 0.01, label: 'α'}),
   beta: State.Slider(1 / 25, {min: 0, max: 1.5, step: 0.001, label: 'β'}),
   q: State.Slider(2 / 3, {min: 0, max: 1.5, step: 0.01}),
@@ -51,6 +69,20 @@ function update () {
 
 state.$onChange(update);
 update();
+
+function triangleWave (x) {
+  return 1 - Math.abs(2 * (x % 1) - 1);
+}
+
+function rafit (t) {
+  if (state.animate) {
+    story.setPosition((triangleWave(t / 1000 * 0.2 * state.animationSpeed)) * 4.0);
+    Object.assign(state, story.getState());
+  }
+  requestAnimationFrame(rafit);
+}
+
+requestAnimationFrame(rafit);
 
 state.getState = function () { return this; }
 
