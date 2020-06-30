@@ -40,11 +40,14 @@ class SphereEversion extends React.Component {
     }
 
     const Q = 2 / 3;
-    const t0 = 1.0;
+    const t00 = 1.0;
+    const t0 = t00 + 2.0;
     const t1 = t0 + 2.0;
     const t1p = t1 + 1.0;
     const t2 = t1 + 7.0;
-    const t3 = t2 + 2.0;
+    const t2a = t2 + 2.0;
+    const t2b = t2a + 2.0;
+    const t3 = t2b + 2.0;
     const t4 = t3 + 2.0;
     const t5 = t4 + 2.0;
     const t6 = t5 + 2.0;
@@ -55,27 +58,41 @@ class SphereEversion extends React.Component {
     const story = sequencer({
       color: [
         {t: t0 + 0, value: 0.0},
-        {t: t0 + 6, value: 1.0, ease: eases.linear },
+        //{t: t0 + 6, value: 1.0, ease: eases.linear },
       ],
       n: [this.nn],
       rotation: [
         {t: t0 - 3, value: 2 * 0},
         {t: t0 + 0, value: 0},
-        {t: t1 + 6, value: 0},
-        {t: t1 + 9, value: 0},
+        {t: t2 + 0, value: 0},
+        {t: t2a + 0, value: 0},
+        {t: t2b + 0, value: Math.PI},
+        {t: t3 + 0, value: Math.PI},
       ],
       section: [this._section],
       translation: [
-        {t: t0 + 0.5, value: 1},
+        {t: t00 + 0, value: 0.0},
+        {t: t00 + 0.7, value: 0.4},
+        {t: t0 + 0.5, value: 0.6},
         {t: t1, value: 0},
         {t: t4, value: 0},
-        {t: t5 - 0.5, value: 1},
+        {t: t5 - 0.5, value: 0.6},
+        {t: t6 - 0.7, value: 0.4},
+        {t: t6, value: 0.0},
       ],
       scale: [
-        {t: t0 + 1, value: 0.5},
+        {t: t00, value: 1.5 / Math.pow(Q, 0.5)},
+        {t: t0, value: 0.6},
         {t: t1, value: 0.4},
+
+        {t: t2, value: 0.4},
+        {t: t2a, value: 0.6},
+        {t: t2b, value: 0.6},
+        {t: t3, value: 0.4},
+
         {t: t4, value: 0.4},
-        {t: t5 - 1, value: 0.5},
+        {t: t5 + 0.5, value: 0.6},
+        {t: t6, value: 1.5 / Math.pow(Q, 0.5)},
       ],
       stereo: [
         {t: t0 + 0.75, value: 1},
@@ -109,14 +126,27 @@ class SphereEversion extends React.Component {
       ],
       t: [
         {t: t2, value: 1 / Q},
+        {t: t2a, value: 0},
+        {t: t2b, value: 0},
         {t: t3, value: -1 / Q},
-        {t: t4, value: -1 / Q},
       ],
-      alpha: [
+      /*alpha: [
         {t: t0, value: 1},
       ],
       beta: [
         {t: t0, value: 1 / 20},
+      ],*/
+      alpha: [
+        {t: t00 + 0, value: 1e-5},
+        {t: t0, value: 1},
+        {t: t5 + 0.5, value: 1},
+        {t: t6, value: 1e-5},
+      ],
+      beta: [
+        {t: t00 + 0, value: 1},
+        {t: t0, value: 1 / 20},
+        {t: t5 + 0.5, value: 1 / 20},
+        {t: t6, value: 1},
       ],
       q: [
         {t: t0 + 0, value: Q},
@@ -125,10 +155,14 @@ class SphereEversion extends React.Component {
         {t: t0 + 0, value: 1},
       ],
       xi: [
+        {t: t00 + 0, value: 0},
+        {t: t0 + 0, value: 1},
         {t: t2 + 0, value: 1},
         {t: t2 + 1, value: 0},
         {t: t3 + 1, value: 0},
         {t: t4 + 0, value: 0},
+        {t: t6 + 0, value: 0},
+        {t: t6 + 0, value: 0},
       ],
       lambda: [
         {t: t1p + 4, value: 0},
@@ -162,7 +196,7 @@ class SphereEversion extends React.Component {
       state: story,
       res: preferredRes,
       dpi,
-      phi: 0.4
+      phi: 0.5
     });
   }
 

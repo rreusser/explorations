@@ -68,18 +68,18 @@ class SphereEversion extends React.Component {
         {t: t0, value: 0},
       ],
       rotation: [
-        {t: t0 - 3, value: 1},
+        {t: t0 - 3, value: 1 * 0},
         {t: t0 + 0, value: 0},
         {t: t0 + 5.5, value: 0},
-        {t: t0 + 9, value: 1},
+        {t: t0 + 9, value: 1 * 0},
       ],
       translation: [
-        {t: t0 + 0, value: 0},
+        {t: t0 + 0, value: 0.5},
         {t: t0 + 0.7, value: 1.4},
         {t: t0 + 2, value: 1},
         {t: t0 + 4, value: 1},
         {t: t0 + 5.3, value: 1.4},
-        {t: t0 + 6, value: 0},
+        {t: t0 + 6, value: 0.5},
       ],
       scale: [
         {t: t0 + 0, value: 1.5 / Math.pow(Q, 0.5)},

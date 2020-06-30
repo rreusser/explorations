@@ -36,7 +36,7 @@ module.exports = function Eversion (regl, props) {
     scale = ar > 1.0 ? 1.0 : ar;
   });
 
-  let frame = regl.frame(({tick}) => {
+  let frame = regl.frame(({tick, time}) => {
     try {
       let drawn = false;
 
@@ -44,7 +44,14 @@ module.exports = function Eversion (regl, props) {
         smoothedScroll.setTarget(props.scroll.position * (props.scroll.frameCount - 1));
         smoothedScroll.tick();
       }
-      
+      /*else {
+        const duration = 8.0;
+        const speed = 0.5;
+        //smoothedScroll.setTarget((1.0 - Math.abs(((time * 0.05) % 2) - 1)) * 8.0);
+        smoothedScroll.setTarget((1.0 - Math.abs(((time * 0.05 * speed / duration) % 2) - 1)) * 16.0 * duration);
+        smoothedScroll.tick()
+      }*/
+        
       if (props.state.setPosition) {
         props.state.setPosition(smoothedScroll.getValue());
       }

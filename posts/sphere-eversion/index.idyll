@@ -7,34 +7,39 @@
 [Header
   title: "Sphere Eversion"
   author: "Ricky Reusser"
-  authorLink: "https://github.com/rreusser" date: "May 25, 2020"
+  authorLink: "https://github.com/rreusser" date: "June 29, 2020"
   fullWidth:true
 /]
 
-Topology is the study of the properties of geometric objects which aren't changed by continuous deformation. A standard low-grade math joke is that toplogists consider a coffee mug and a doughnut equivalent because they're both torii; one can be continuously deformed into the other—called a *homotopy*—without cutting the surface. (Pauses for laughter.)
+Topology is the study of the properties of geometric objects which aren't changed by continuous deformation. A standard low-grade math joke is that toplogists consider a coffee mug and a doughnut equivalent because they're both torii—(pauses for laughter)—one can be continuously deformed into the other, called a *homeomorphism*, without cutting or creasing the surface.
 
 [figure]
   [img src:"static/images/Mug_and_Torus_morph.gif"/]
   [figcaption]
-    Homotopy between two different embeddings of the torus in [Equation latex:"\mathbb{R}^3"/]. Source: [Wikipedia](https://commons.wikimedia.org/wiki/File:Mug_and_Torus_morph.gif)
+    Homeomorphism between a doughnut and a mug. Source: [Wikipedia](https://commons.wikimedia.org/wiki/File:Mug_and_Torus_morph.gif)
   [/figcaption]
 [/figure]
 
 In this post, we play a topological game called *eversion*. Our objective is simple: turn a sphere inside out without cutting or creasing it. We consider a sphere, though a torus is also an [interesting challenge](https://www.youtube.com/watch?v=kQcy5DvpvlM).
 
-That a sphere (specifically the two-sphere [Equation latex:"S^2"/] embedded in three dimensional space [Equation latex:"\mathbb{R}^3"/]) can be turned inside out was proved by Stephen Smale in 1957. However the proof is strictly a proof of existence, offering no specific guidance for those hoping to perform the feat.
+That a sphere (specifically the two-sphere [Equation latex:"S^2"/] embedded in three dimensional space [Equation latex:"\mathbb{R}^3"/]) can be turned inside out was proved by Stephen Smale in 1957. However the proof is a proof of existence, offering no particular guidance for those hoping to perform the feat.
 
-TODO: Step through or at least reference why this is impossible for [Equation latex:"S^1"/] in [Equation latex:"\mathbb{R}^2"/] (i.e. a circle). In short, every attempt to modify the turning number introduces oppositely oriented turns which prevent you from changing it at all! See for example: [Outside In](https://www.youtube.com/watch?v=wO61D9x6lNY).
+[figure]
+  [img src:"static/images/2d.jpg" style:`{width:'450px'}`/]
+  [figcaption]
+    Circle eversion in two dimensions is impossible. We always get stuck!
+  [/figcaption]
+[/figure]
+
+We should take a moment to appreciate that the analogous problem of everting a circle in two dimensions is impossible. The figure above illustrates that there's really nothing to do but introduce loops which we can't then get rid of. Don't take my word for it though! The classic video [Outside In](https://www.youtube.com/watch?v=wO61D9x6lNY) has an much more involved discussion of what happens when we try.
 
 Since the original proof, a number of realizations of sphere eversion have been discovered, ranging in generality and complexity. This post follows the method of Bednorz and Bednorz from [Analytic sphere eversion using ruled surfaces](https://arxiv.org/abs/1711.10466).
 
-Before stepping through the eversion, we lay out our ground rules, of which there are just two. We may not cut the surface, and the surface must always remain smooth.  Note that unlike actual physical objects, self-intersection of the surface *is* permitted.
-
-These two rules thwart trivial solutions. The first rule prevents us from simply cutting the sphere at the equator and gluing it together backwards. The second rule, smoothness, is trickier to visualize. We'll see below that it prevents us from pushing one end of the sphere straight through the other.
+Before stepping through the eversion, we lay out our ground rules, of which there are just two: We may not cut the surface, and the surface must always remain smooth.  Note that unlike physical objects, self-intersection *is* permitted.
 
 ## Bednorz' Sphere Eversion
 
-We start with a full presentation of the eversion of Bednorz and Bednorz in [Analytic sphere eversion using ruled surfaces](https://arxiv.org/abs/1711.10466). It goes by quickly, so we'll then break it down and try to understand it a bit better.
+We start with a full presentation of the sphere eversion of Bednorz and Bednorz in [Analytic sphere eversion using ruled surfaces](https://arxiv.org/abs/1711.10466). It goes by quickly, so we'll then break it down and try to understand it a bit better. Along the way, you can drag the slider at the top to examine cross-sections.
 
 [var name:"quality" value:"high"/]
 Quality: [Select value:quality options:`["low", "medium", "high"]`/]
@@ -89,13 +94,11 @@ Quality: [Select value:quality options:`["low", "medium", "high"]`/]
   [Scrollyteller.Frame/]
 [/Scrollyteller]
 
-Success! But that all happened very quickly. What is clear is that it's of critical importance how we manage the opening at the top. In some sense, we do simply push one end of the sphere right through the other, but we need some clever tricks to keep the hole at the top smooth.
+Success! But that all happened very quickly. What happens at the top is clearly the key. In some sense, we do simply push one end of the sphere right through the other, but we need some clever tricks to keep the hole at the top smooth.
 
-Bednorz et al. (or, well, Bednorz et Bednorz) break the method down as follows. As long as nothing topologically interesting happens at the poles of the sphere, we can simply remove them from the equation and focus on a cylindrical band around the equator. All that's left then is to manipulate the cylindrical band carefully and replace the poles at the end of the process.
+Bednorz and Bednorz break down the method as follows. As long as nothing topologically interesting happens at the poles of the sphere, we can simply remove them from the equation and focus on a cylindrical band around the equator. All that's left then is to manipulate the cylindrical band carefully and replace the poles at the end of the process.
 
-The key element of their method is a family of *[ruled surfaces](https://mathworld.wolfram.com/RuledSurface.html)*, or surfaces swept out by a straight line moving through space, which accomplish this task. They propose a family parameterized by time [Equation latex:"t"/]. They're careful to prove the surface remains smooth during the process, but we'll remain content to vary [Equation latex:"t"/] from one value to another, get the result we want, and visually confirm smoothness.
-
-Recall that this is topology so that we've been calling this surface a cylinder not because it looks like the ordinary right circular cylinder we're familiar with, but because it can smoothly be turned into a right circular cylinder.
+The key element of their method is a family of *[ruled surfaces](https://mathworld.wolfram.com/RuledSurface.html)*, or surfaces swept out by a straight line moving through space, which accomplish this task. They propose a family parameterized by time [Equation latex:"t"/]. They're careful to prove the surface remains smooth during the process, but we'll remain content to get to our destination and visually check the smoothness along the way.
 
 They propose the family of ruled surfaces given by the equations
 
@@ -131,7 +134,7 @@ Note also that although we'll visualize eversion with [Equation latex:"n = 2"/],
 
 [br/]
 
-Of course we want to evert a full sphere and not just a cylindrical band, so the remainder of their paper focuses on using stereographic projections to smoothly close the caps of the cylindrical band and maintain the topology of the sphere during the entire process. The full eversion is illustrated above, but let's now step back through it, taking a bit more care to focus on the regions of interest.
+Of course we want to evert a full sphere and not just a cylindrical band, so the remainder of their paper focuses on using stereographic projections to smoothly close the caps of the cylindrical band and maintain the topology of the sphere during the entire process. The full eversion is illustrated above, but let's now step back through it, taking a bit more care to focus on the region of interest.
 
 [Scrollyteller
   fullWidth:true
@@ -157,7 +160,7 @@ Of course we want to evert a full sphere and not just a cylindrical band, so the
 
   [Scrollyteller.Frame]
     [Caption left:'10%' top:'70%']
-      As long as we keep the surface smooth and don't introduce extra twisting at the edges, we can distort the surface however we'd like.
+      As long as we keep the surface smooth and don't twist the edges since we still have the rest of the sphere attached, we can distort the surface however we'd like.
     [/Caption]
   [/Scrollyteller.Frame]
 
@@ -213,7 +216,16 @@ Of course we want to evert a full sphere and not just a cylindrical band, so the
 
   [Scrollyteller.Frame/]
   [Scrollyteller.Frame/]
-  [Scrollyteller.Frame/]
 [/Scrollyteller]
 
-Conclusion TBD.
+And that's that! I regret that I have nothing novel or nuanced to say about the eversion itself, but my goal here was to explore the visual presentation since videos and images always left me wishing it were a bit more tangible.
+
+There's no shortage of really great visualizations and resources regarding sphere eversion, among other topics. Below are a few links relevant to both this eversion and the topic in general.
+
+- [Analytic sphere eversion using ruled surfaces](https://arxiv.org/abs/1711.10466)
+- [Adam Bednorz Sphere Eversion](https://www.fuw.edu.pl/~abednorz/eversion/index.html): a webpage with videos and DIY instructions using paper!
+- [Visualization by Marcel Padilla](https://www3.math.tu-berlin.de/geometrie/wp_padilla/sphere-eversion-with-transparency-video/)
+- [Everting a Sphere by Chris Hills](https://chrishills.org.uk/ChrisHills/sphereeversion/): an excellent collection of links and resources
+- [Sphere Eversion on Wikipedia](https://en.wikipedia.org/wiki/Sphere_eversion)
+
+Comments? Questions? Corrections? [Let me know!](https://twitter.com/rickyreusser)

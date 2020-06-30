@@ -162,7 +162,7 @@ module.exports = function (regl, res) {
 
         float sgn = gl_FrontFacing ? 1.0 : -1.0;
 
-        float grid = gridFactor(vUV * vec2(2.0, 1.0) * 6.0 / PI, 0.45 * pixelRatio, 1.0);
+        float grid = gridFactor(vUV * vec2(2.0, 1.0) * 8.0 / PI, 0.45 * pixelRatio, 1.0);
 
         float fatGrid = gridFactor((vUV.x * 0.638 + negClip) / (posClip + negClip), 7.0 * pixelRatio, 1.0);
         if (abs(vUV.x) < 0.7) fatGrid = 1.0;
