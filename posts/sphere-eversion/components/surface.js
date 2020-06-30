@@ -65,6 +65,7 @@ class SphereEversion extends React.Component {
       posClip: 0.5,
       negClip: 0.5,
       fatEdge: 0,
+      strips: 0,
       shittyEversion: 0,
       t: 1 / Q - 1e-4,
       alpha: 1,

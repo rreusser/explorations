@@ -117,7 +117,7 @@ module.exports = function (regl, res) {
       uniform mat4 view;
       uniform bool wire;
       varying vec2 vUV;
-      uniform float fatEdge, posClip, negClip, shittyEversion, pixelRatio, section;
+      uniform float fatEdge, posClip, negClip, shittyEversion, pixelRatio, section, strips;
 
       #define PI 3.141592653589
 
@@ -173,6 +173,8 @@ module.exports = function (regl, res) {
 
         float bad = smoothstep(0.8, 1.0, shittyEversion);
 
+        if (fract(vUV.y * (0.5 / PI) * strips) > 0.5) discard; 
+
         if (wire) {
           vec3 gridColor = mix(
             vec3(1),
@@ -227,6 +229,7 @@ module.exports = function (regl, res) {
       negClip: regl.prop('negClip'),
       rotation: regl.prop('rotation'),
       fatEdge: regl.prop('fatEdge'),
+      strips: regl.prop('strips'),
       shittyEversion: regl.prop('shittyEversion'),
       pixelRatio: regl.context('pixelRatio'),
       section: (ctx, props) => Math.sinh(props.section * 1.2),

@@ -11,7 +11,6 @@ const regl = createREGL({
 });
 
 const state = GUI(State({
-  eq4: false,
   n: State.Slider(2, {min: 2, max: 6, step: 1}),
   t: State.Slider(1.5, {min: -1.5, max: 1.5, step: 0.01}),
   alpha: State.Slider(1, {min: 0, max: 1.5, step: 0.01, label: 'α'}),
@@ -21,21 +20,29 @@ const state = GUI(State({
   xi: State.Slider(1, {min: 0, max: 1.5, step: 0.01, label: 'ξ'}),
   lambda: State.Slider(1, {min: 0, max: 1, step: 0.01, label: 'λ'}),
   omega: State.Slider(2, {min: 1, max: 3, step: 0.5, label: 'ω'}),
-  scale: State.Slider(0.5, {min: 0, max: 3, step: 0.1, label: 'scale'}),
-  translation: State.Slider(0.5, {min: 0, max: 3, step: 0.1, label: 'translation'}),
-  limit: State.Slider(0, {min: 0, max: 1, step: 0.01, label: 'limit'}),
-  rotation: State.Slider(0, {min: 0, max: 1, step: 0.01, label: 'rotation'}),
-  section: State.Slider(2, {min: -2, max: 2, step: 0.01, label: 'rotation'}),
-  negClip: 1,
-  posClip: 1,
-  shittyEversion: 0,
-  stereo: 1,
-  Qinv: 0,
-  fatEdge: 100,
+  //section: State.Slider(2, {min: -2, max: 2, step: 0.01, label: 'section'}),
+  stereo: State.Slider(0, {min: 0, max: 1, step: 0.01, label: 'stereographic'}),
+  strips: State.Slider(4, {min: 0, max: 16, step: 1, label: 'strips'}),
 }));
+
+function update () {
+  state.Qinv = 1.0 / state.q;
+  state.shittyEversion = 0;
+  state.fatEdge = 0;
+  state.translation = 0;
+  state.scale = 0.5;
+  state.rotation = 0;
+  state.limit = 0;
+  state.negClip = 1 - Math.pow(1 - state.stereo, 0.7) * 0.5
+  state.posClip = 1 - Math.pow(1 - state.stereo, 0.7) * 0.5
+  state.section = 4
+}
+
+state.$onChange(update);
+update();
 
 state.getState = function () { return this; }
 
-const eversion = new Eversion(regl, {state, wheel: true, res: 150});
+const eversion = new Eversion(regl, {state, wheel: true, res: 250});
 state.$onChange(eversion.redraw);
 

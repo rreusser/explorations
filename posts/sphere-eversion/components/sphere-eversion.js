@@ -52,6 +52,9 @@ class SphereEversion extends React.Component {
         {t: t0 + 0, value: 0.0},
         {t: t0 + 6, value: 1.0, ease: eases.linear },
       ],
+      strips: [
+        {t: 0, value: 0},
+      ],
       n: [
         {t: t0 + 0, value: 2},
       ],
