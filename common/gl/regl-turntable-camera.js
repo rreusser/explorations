@@ -76,6 +76,7 @@ module.exports = function createReglCamera (regl, opts) {
     camera.resize(getAspectRatio());
   }, false);
 
+  camera.element = regl._gl.canvas;
   createInteractions(camera);
   
   return invokeCamera;
