@@ -22,6 +22,7 @@
     "gl-vec4": "^1.0.1",
     "idyll": "^4.4.0",
     "idyll-d3-component": "^2.0.0",
+    "inertial-turntable-camera": "^2.0.4",
     "insert-css": "^2.0.0",
     "mouse-change": "^1.4.0",
     "mouse-event": "^1.0.5",
@@ -29,6 +30,7 @@
     "mouse-wheel": "^1.2.0",
     "ndarray": "^1.0.19",
     "ndarray-fft": "^1.0.3",
+    "normalized-interaction-events": "^2.0.1",
     "regl": "^1.5.0",
     "util-extend": "^1.0.3",
     "xtend": "^4.0.2"

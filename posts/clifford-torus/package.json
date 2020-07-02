@@ -1,0 +1,20 @@
+{
+  "name": "sphere-eversion",
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "start": "budo index.js --open --live",
+    "build": "mkdir -p ../../docs/clifford-torus && browserify index.js | indexhtmlify | html-inject-meta | html-inject-github-corner > ../../docs/clifford-torus/index.html"
+  },
+  "devDependencies": {
+    "budo": "^11.6.4",
+    "gh-pages": "^0.12.0",
+    "html-inject-github-corner": "^2.1.4",
+    "html-inject-meta": "^3.0.0",
+    "indexhtmlify": "^2.0.0"
+  },
+  "github-corner": {
+    "side": "left",
+    "url": "https://github.com/rreusser/explorations/tree/master/posts/clifford-torus"
+  }
+}
