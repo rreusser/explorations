@@ -8,7 +8,7 @@ A [Clifford torus](https://en.wikipedia.org/wiki/Clifford_torus) is defined by t
 (x, y, z, w) = (cos(θ), sin(θ), cos(φ), sin(φ)) / √2
 ```
 
-You then apply a rotation—here I'm using the camera controller's view matrix to the x-y-w coordinates—and then compute a stereographic projection into three dimensions:
+Where (θ, φ) ∈ [0, 2π] ⨉ [0, 2π]. You then apply a rotation—here I'm using the camera controller's view matrix to the x-y-w coordinates—and then compute a stereographic projection into three dimensions:
 
 ```
 (x', y', z') = (x, y, z) / (1 - w)
