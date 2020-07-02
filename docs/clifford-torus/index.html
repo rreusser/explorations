@@ -2664,7 +2664,10 @@ const mat4multiply = require('gl-mat4/multiply');
 const mat4lookAt = require('gl-mat4/lookAt');
 
 function createDrawCliffordTorus (regl, res) {
-  const mesh = meshSurface({}, (out, u, v) => {out[0] = u, out[1] = v}, {
+  const mesh = meshSurface({}, (out, u, v) => {
+    out[0] = u;
+    out[1] = v;
+  }, {
     resolution: [res, res],
     uDomain: [-Math.PI, Math.PI],
     vDomain: [-Math.PI, Math.PI],
@@ -2679,8 +2682,14 @@ function createDrawCliffordTorus (regl, res) {
       varying vec2 vUV;
 
       vec3 f(vec2 uv) {
+        // Cartisian product of two circles:
         vec4 p = vec4(cos(uv.x), sin(uv.x), cos(uv.y), sin(uv.y)) / sqrt(2.0);
+
+        // Use the upper 3x3 block of the camera's view matrix (i.e. rotation without the translation) and apply
+        // // to the x-y-w coordinates
         p.xyw = mat3(uView) * p.xyw;
+
+        // Compute the stereographic projection
         return p.xyz / (1.0 - p.w);
       }
 
@@ -2709,6 +2718,7 @@ function createDrawCliffordTorus (regl, res) {
 
       #define PI 3.141592653589
 
+      // From https://github.com/rreusser/glsl-solid-wireframe
       float gridFactor (vec2 parameter, float width, float feather) {
         float w1 = width - feather * 0.5;
         vec2 d = fwidth(parameter);
@@ -2718,6 +2728,7 @@ function createDrawCliffordTorus (regl, res) {
       }
 
       void main () {
+        // Shading technique adapted/simplified/customized from: https://observablehq.com/@rreusser/faking-transparency-for-3d-surfaces
         vec3 normal = normalize(vNormal);
         float vDotN = abs(dot(normal, normalize(vPosition - uFixedEye)));
         float vDotNGrad = fwidth(vDotN);
@@ -2771,6 +2782,8 @@ let frame = regl.frame(({tick, time}) => {
     if (!dirty) return;
     regl.clear({color: [1, 1, 1, 1]});
 
+    // Perform two drawing passes, first for the solid surface, then for the wireframe overlayed on top
+    // to give a fake transparency effect
     drawTorus([
       {wire: false},
       {wire: true}
