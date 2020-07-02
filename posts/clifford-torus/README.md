@@ -1,12 +1,15 @@
-This directory contains the source to the article [Sphere Eversion](https://rreusser.github.io/explorations/sphere-eversion/). The article text is in index.idyll and can be started by running `npm install` and then
+# Clifford Torus
+
+This directory contains the source to the [Clifford Torus](https://rreusser.github.io/explorations/clifford-torus/).
+
+There are some shared dependencies a couple directories up, so you'll need to run `npm install` both in the root project directory and in this directory:
 
 ```sh
-idyll
-```
-
-in this directory. There's also a standalone driver for exploring the parameters of the eversion. It can be run with
-
-```
+git clone https://github.com/rreusser/explorations.git
+cd explorations
+npm install
+cd posts/clifford-torus
+npm install
 npm start
 ```
 
