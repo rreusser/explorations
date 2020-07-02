@@ -21,6 +21,7 @@
     "name": "Clifford Torus",
     "description": "A sterographic projection of Clifford torus in WebGL",
     "author": "Ricky Reusser",
-    "url": "https://rreusser.github.io/explorations/clifford-torus/"
+    "url": "https://rreusser.github.io/explorations/clifford-torus/",
+    "image": "https://rreusser.github.io/explorations/clifford-torus/social.jpg"
   }
 }
