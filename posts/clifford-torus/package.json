@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "start": "budo index.js --open --live",
-    "build": "mkdir -p ../../docs/clifford-torus && browserify index.js | indexhtmlify | html-inject-meta | html-inject-github-corner > ../../docs/clifford-torus/index.html && cp social.jpg ../../docs/clifford-torus"
+    "build": "mkdir -p ../../docs/clifford-torus && browserify index.js | indexhtmlify | html-inject-meta > ../../docs/clifford-torus/index.html && cp social.jpg ../../docs/clifford-torus"
   },
   "devDependencies": {
     "budo": "^11.6.4",
