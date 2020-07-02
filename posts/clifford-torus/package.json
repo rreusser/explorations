@@ -1,10 +1,10 @@
 {
-  "name": "sphere-eversion",
+  "name": "clifford-torus",
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
     "start": "budo index.js --open --live",
-    "build": "mkdir -p ../../docs/clifford-torus && browserify index.js | indexhtmlify | html-inject-meta | html-inject-github-corner > ../../docs/clifford-torus/index.html"
+    "build": "mkdir -p ../../docs/clifford-torus && browserify index.js | indexhtmlify | html-inject-meta | html-inject-github-corner > ../../docs/clifford-torus/index.html && cp social.jpg ../../docs/clifford-torus"
   },
   "devDependencies": {
     "budo": "^11.6.4",
@@ -16,5 +16,11 @@
   "github-corner": {
     "side": "left",
     "url": "https://github.com/rreusser/explorations/tree/master/posts/clifford-torus"
+  },
+  "html-inject-meta": {
+    "name": "Clifford Torus",
+    "description": "A sterographic projection of Clifford torus in WebGL",
+    "author": "Ricky Reusser",
+    "url": "https://rreusser.github.io/explorations/clifford-torus/"
   }
 }
