@@ -144,12 +144,10 @@ module.exports = function (regl, res) {
 
 
       void main () {
-        float divFunc = section - vPosition.y;
-        if (divFunc < 0.0) {
+        if (fract(vUV.y / PI * floor(1.0 / section)) > section) {
           discard;
           return;
         }
-        float divider = abs(divFunc) > 0.04 ? 1.0 : stripeFactor(divFunc, 3.0 * pixelRatio, 1.0);
 
         vec3 dPdx = dFdx(vPosition);
         vec3 dPdy = dFdy(vPosition);
@@ -189,8 +187,6 @@ module.exports = function (regl, res) {
           );
           gl_FragColor.a += 0.12 * bad * (abs(vPosition).y < 0.1 ? 1.0 : 0.0);
 
-          //gl_FragColor = mix(vec4(0.0, 1.0, 1.0, 1.0), gl_FragColor, divider);
-
           if (gl_FragColor.a < 1e-3) discard;
         } else {
           baseColor = mix(
@@ -205,9 +201,7 @@ module.exports = function (regl, res) {
             1.0);
 
           gl_FragColor = mix(vUV.x > 0.0 ? vec4(1, 0.1, 0.2, 1) : vec4(0.4, 0.2, 1, 1), gl_FragColor, fatGrid);
-
         }
-        gl_FragColor.rgb = mix(vec3(0.0, 1.0, 0.2), gl_FragColor.rgb, divider);
       }
     `,
     uniforms: {
@@ -232,7 +226,7 @@ module.exports = function (regl, res) {
       strips: regl.prop('strips'),
       shittyEversion: regl.prop('shittyEversion'),
       pixelRatio: regl.context('pixelRatio'),
-      section: (ctx, props) => Math.sinh(props.section * 1.2),
+      section: regl.prop('section'),
     },
     attributes: {
       uv: positionsBuffer,
