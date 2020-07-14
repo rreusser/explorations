@@ -5,6 +5,8 @@
   shareImageUrl:"https://rreusser.github.io/explorations/sphere-eversion/static/images/eversion.jpg"
 /]
 
+[Menu fullWidth:true/]
+
 [Header
   title: "Sphere Eversion"
   author: "Ricky Reusser"

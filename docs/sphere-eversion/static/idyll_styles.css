@@ -1967,128 +1967,16 @@ figcaption {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  max-width: 500px;
-}
-
-.menu__thumb {
-  z-index: 3;
-  position: relative;
-  display: block;
-  border-radius: 0;
-  background-color: transparent;
-  border: none;
-  width: 50px;
-  height: 50px;
-  outline: none;
-  cursor: pointer;
-}
-
-.menu__thumb:hover {
-  background-color: rgba(0, 0, 0, 0.2);
-}
-
-.menu__thumb:active {
-  background-color: rgba(0, 0, 0, 0.4);
-}
-
-.menu__hamburger {
-  width: 20px;
-  height: 2px;
-  background-color: white;
-  position: absolute;
-  left: 15px;
-  opacity: 1;
-  transition: all 0.1s ease-in-out;
-  transform-origin: 50% 50%;
-}
-
-.menu__hamburger:nth-child(1) {
-  top: 18px;
-}
-
-.menu__hamburger:nth-child(2) {
-  top: 24px;
-}
-
-.menu__hamburger:nth-child(3) {
-  top: 30px;
-}
-
-.menu--expanded .menu__hamburger:nth-child(1) {
-  transform: translate(0, 6px) rotate(45deg) scale(1.2, 1);
-}
-
-.menu--expanded .menu__hamburger:nth-child(2) {
-  opacity: 0;
-}
-
-.menu--expanded .menu__hamburger:nth-child(3) {
-  transform: translate(0, -6px) rotate(-45deg) scale(1.2, 1);
-}
-
-.menu--expanded .menu__thumb:hover,
-.menu--expanded .menu__thumb:active {
-  background-color: white;
-}
-
-.menu--expanded .menu__thumb:hover .menu__hamburger,
-.menu--expanded .menu__thumb:active .menu__hamburger {
-  background-color: #383e3e;
-}
-
-.menu__content {
-  position: absolute;
-  z-index: 2;
-  top: 0;
-  left: 0;
-  right: 0;
-  width: 100%;
-  background-color: #383e3e;
-  color: white;
-  transform: translate(-100%, 0);
-  transition: transform 0.1s ease-in-out;
-  box-shadow: none;
-  pointer-events: none;
-}
-
-.menu--expanded .menu__content {
-  pointer-events: auto;
-  box-shadow: 0 0 7px rgba(0, 0, 0, 0.5);
-}
-
-.menu__heading {
-  padding-left: 50px;
-}
-
-.menu__heading a {
-  height: 50px;
-  display: block;
-  line-height: 50px;
-  padding-left: 50px;
-}
-
-.menu a {
-  padding: 0 15px;
-  line-height: 50px;
-  height: 50px;
-  color: white;
-}
-
-.menu--expanded a:hover,
-.menu__expanded a:active {
-  text-decoration: none;
-  background-color: white;
-  color: #383e3e;
-}
-
-.menu--expanded .menu__content {
-  transform: translate(0, 0);
+  z-index: 10;
 }
 
 .menu__item {
-  display: block;
+  padding: 5px 10px;
+  font-size: 0.9em;
+  text-shadow: 0 0 1px #000;
+  color: white;
 }
+
 
 .projects {
   margin-left: auto;
