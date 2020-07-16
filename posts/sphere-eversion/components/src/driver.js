@@ -86,6 +86,6 @@ requestAnimationFrame(rafit);
 
 state.getState = function () { return this; }
 
-const eversion = new Eversion(regl, {state, wheel: true, res: 250, far: 100});
+const eversion = new Eversion(regl, {state, wheel: true, res: 250, far: 100, noResize: true});
 state.$onChange(eversion.redraw);
 

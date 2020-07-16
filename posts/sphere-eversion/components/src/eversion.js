@@ -28,13 +28,15 @@ module.exports = function Eversion (regl, props) {
 
   let dirty = true;
 
-  window.addEventListener('resize', () => {
-    regl._gl.canvas.width = Math.floor(props.dpi * regl._gl.canvas.offsetWidth);
-    regl._gl.canvas.height = Math.floor(props.dpi * regl._gl.canvas.offsetHeight);
-    camera.taint()
-    const ar = getAspectRatio();
-    scale = ar > 1.0 ? 1.0 : ar;
-  });
+  if (props.noResize !== true) {
+    window.addEventListener('resize', () => {
+      regl._gl.canvas.width = Math.floor(props.dpi * regl._gl.canvas.offsetWidth);
+      regl._gl.canvas.height = Math.floor(props.dpi * regl._gl.canvas.offsetHeight);
+      camera.taint()
+      const ar = getAspectRatio();
+      scale = ar > 1.0 ? 1.0 : ar;
+    });
+  }
 
   let frame = regl.frame(({tick, time}) => {
     try {
